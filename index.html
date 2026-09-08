@@ -14,6 +14,37 @@
             background-color: #ffffff;
             font-family: "Microsoft Yahei", sans-serif;
         }
+
+        /* 欢迎页样式 */
+        #welcome-page {
+            display: none;
+            width: 100vw;
+            height: 100vh;
+            background-color: #1677ff;
+            color: white;
+            text-align: center;
+            position: fixed;
+            top:0;
+            left:0;
+            z-index:999;
+        }
+        .welcome-text{
+            font-size:48px;
+            font-weight:bold;
+            position: relative;
+            top:35%;
+            animation: welcomeFade 1.5s ease-out;
+        }
+        .welcome-sub{
+            font-size:28px;
+            margin-top:40px;
+            animation: welcomeFade 1.8s ease-out;
+        }
+
+        /* 工具箱主内容 */
+        #main-content{
+            display: none;
+        }
         .header-title {
             text-align: center;
             font-size: 36px;
@@ -27,14 +58,52 @@
             font-size: 20px;
             line-height: 2.2;
         }
+
+        /* 欢迎动画 */
+        @keyframes welcomeFade {
+            from {
+                opacity:0;
+                transform: scale(0.6);
+            }
+            to {
+                opacity:1;
+                transform: scale(1);
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="header-title">林诗杰的专用工具箱</div>
-    <div class="item-box">
-        卸载工具：<a href="https://geekuninstaller.com/download" target="_blank">点击跳转下载页面</a><br>
-        万能工具：<a href="https://soft.3dmgame.com/down/368084.html" target="_blank">点击跳转下载页面</a><br>
-        希沃官网：<a href="https://www.seewo.com/product/application" target="_blank">点击跳转页面</a>
+    <!-- 欢迎页面 -->
+    <div id="welcome-page">
+        <div class="welcome-text">🎉欢迎使用林诗杰的工具箱</div>
+        <div class="welcome-sub">欢迎张老师</div>
     </div>
+
+    <!-- 工具箱主体 -->
+    <div id="main-content">
+        <div class="header-title">林诗杰的专用工具箱</div>
+        <div class="item-box">
+            卸载工具：<a href="https://geekuninstaller.com/download" target="_blank">点击跳转下载页面</a><br>
+            万能工具：<a href="https://soft.3dmgame.com/down/368084.html" target="_blank">点击跳转下载页面</a><br>
+            希沃官网：<a href="https://www.seewo.com/product/application" target="_blank">点击跳转页面</a>
+        </div>
+    </div>
+
+    <script>
+        const password = "123456";
+        let inputPwd = prompt("请输入访问密码：");
+        if(inputPwd === password){
+            //密码正确：显示欢迎页
+            document.getElementById("welcome-page").style.display = "block";
+            //2秒后隐藏欢迎页，展示工具箱
+            setTimeout(()=>{
+                document.getElementById("welcome-page").style.display = "none";
+                document.getElementById("main-content").style.display = "block";
+            },2000);
+        }else{
+            alert("密码错误，禁止访问！");
+            document.body.innerHTML = "<h2 style='text-align:center;margin-top:100px;color:red'>密码错误，无法查看工具箱</h2>";
+        }
+    </script>
 </body>
 </html>
